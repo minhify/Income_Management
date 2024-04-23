@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
 
+        ActionBar actionBar = getSupportActionBar();
+        //actionBar.hide();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
         usname = findViewById(R.id.txtLginUsername);
         uspasswd = findViewById(R.id.txtLginPassword);
         mAuth = FirebaseAuth.getInstance();
@@ -109,16 +112,16 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 mAuth.sendPasswordResetEmail(usname.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

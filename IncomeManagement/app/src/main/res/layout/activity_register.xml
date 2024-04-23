@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center"
             android:gravity="left"
-            android:layout_margin="10"
+            android:layout_margin="10dp"
             android:text="Please enter the correct email. \nEmail will be used to login and reset password if you do not remember.\nWe will send a password confirmation via this email if you forget your password."
             android:paddingHorizontal="20dp"
             />

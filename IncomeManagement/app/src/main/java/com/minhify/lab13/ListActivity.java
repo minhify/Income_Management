@@ -1,6 +1,5 @@
 package com.minhify.lab13;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +44,44 @@ public class ListActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_actionbar, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Xử lý sự kiện khi người dùng nhấp vào các mục menu trên ActionBar
+        if (item.getItemId() == R.id.userinfo) {
+            DatabaseReference dbr = FirebaseDatabase.getInstance().getReference("Users");
+            Query query = dbr.orderByChild("email").equalTo(user.getEmail());
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        Users us = dataSnapshot.getValue(Users.class);
+                        us.setUid(dataSnapshot.getKey());
+                        Intent intent = new Intent(getApplicationContext(),UserInfoActivity.class);
+                        intent.putExtra("uid", us.getUid());
+                        intent.putExtra("name", us.getName());
+                        intent.putExtra("phone", us.getPhone());
+                        startActivity(intent);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return true;
+        } else if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent2);
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+/*
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Xử lý sự kiện khi người dùng nhấp vào các mục menu trên ActionBar
@@ -82,7 +119,7 @@ public class ListActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
