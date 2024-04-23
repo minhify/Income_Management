@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293133872463",
+    "project_id": "income-management-c01f1",
+    "storage_bucket": "income-management-c01f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293133872463:android:e37b349b888476a19fe93a",
+        "android_client_info": {
+          "package_name": "com.minhify.lab13"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0AGyysuwNtA9CuGISNAAHJVl-erk2eq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
